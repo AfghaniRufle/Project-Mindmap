@@ -1,0 +1,22 @@
+PROG_START
+
+NOTE_1_START
+<TITLE=My Plan>
+this is the note bruh
+i hate myself 
+consider killing myself lol
+ttps://www.youtube.com/watch?v=FtutLA63Cp8 <-- bad apple
+FOOT_1_START
+TEST1
+TEST2
+TEST3
+TEST4
+TEST5
+TEST6
+TES7
+FOOT_1_END
+FOOT_2_START
+TESTTT
+FOOT_2_END
+NOTE_1_END
+PROG_END
