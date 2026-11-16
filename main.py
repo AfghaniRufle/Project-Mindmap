@@ -10,7 +10,7 @@ n = 0
 
 EXPECTED = 1
 with open("datafile.txt",'r') as file_opener : 
-#Check dulu validitasnya
+#Check dulu validitasnya 
     read = file_opener.readline()
     if not ("PROG_START" in read) : 
         print("INVALID CODE TEXT CODE 1")
@@ -20,7 +20,7 @@ with open("datafile.txt",'r') as file_opener :
     if not(last == "PROG_END") : 
         print("INVALID CODE TEXT CODE 1")
         pass
-
+#READ
     file_opener.seek(0)
     EXPECTED = 1
     cache_note = ""
@@ -28,11 +28,11 @@ with open("datafile.txt",'r') as file_opener :
     for read in file_opener : 
         if f"NOTE_{EXPECTED}_START" in read :
             if f"NOTE_{EXPECTED}_END" in read : 
+                text.append()
                 EXPECTED += 1
-                
+
             footer_num = 1
             text.append([])
-            #EXPECTED += 1 
             for read in file_opener : 
                 cache_note += read
                 if f"FOOT_{footer_num}_START" in read :
@@ -44,10 +44,9 @@ with open("datafile.txt",'r') as file_opener :
                             break
                         cache += read
                         
-
-    
-#Read
-
 #fungsi_untuk_membuat_GUI dan lain lain
 
-#
+# DEBUGGING
+for r1 in text : 
+    for r2 in r1 : 
+        print(r2)
