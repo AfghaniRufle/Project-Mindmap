@@ -11,10 +11,11 @@ def check_out_end(read) :
 
 def print_error(type) : 
     print(type)
-text = [] 
+foot = [] 
 note = []
 n = 0
 
+#MAIN
 EXPECTED = 1
 with open("datafile.txt",'r') as file_opener : 
 #Check dulu validitasnya 
@@ -27,35 +28,44 @@ with open("datafile.txt",'r') as file_opener :
     if not(last == 'PROG_END') : 
         print("INVALID CODE TEXT CODE 1-1")
         pass
-#READ
     file_opener.seek(0)
+
+#READ THE TEXT FILE AND MAKE ARRAY
     EXPECTED = 1
+    footer_num = 1
     cache_note = ""
     cache = ""
-    #READ PROGRAM/NOTE
+
+    #READ NOTE
     for read in file_opener : 
+        if f"NOTE_{EXPECTED}_END" in read : 
+            EXPECTED += 1
+            note.append(cache_note)
+            cache_note = ""
+
+        cache_note += read
+
         if f"NOTE_{EXPECTED}_START" in read :
-            if f"NOTE_{EXPECTED}_END" in read : 
-                EXPECTED += 1
+            file_opener.readline()
             footer_num = 1
-            text.append([])
+            foot.append([])
+        # READ FOOT IN NOTE   
+        if f"FOOT_{footer_num}_START" in read :
             for read in file_opener : 
-                cache_note += read
-                if f"FOOT_{footer_num}_START" in read :
-                    cache = ""
-                    # READ FOOT IN NOTE
-                    for read in file_opener : 
-                        if check_out_end(read) : print_error("ERROR IN FOOTREADER")
-                        if f"FOOT_{footer_num}_END" in read :
-                            if not(read.strip() == '') :
-                                text[EXPECTED-1].append(cache)
+                if f"FOOT_{footer_num}_END" in read :
+                            if read.strip() == '' :
+                                break
+                            foot[EXPECTED-1].append(cache)        
                             footer_num += 1
+                            cache = ""
                             break
-                        cache += read
-                        
-#fungsi_untuk_membuat_GUI dan lain lain
+                cache += read
+            
+#READ THE ARRAY AND MAKE PROGRAM
 
 # DEBUGGING
-for i in range(len(text)):              # i = nomor baris
-    for j in range(len(text[i])):       # j = nomor kolom
-        print(i, j, text[i][j])
+for i in range(len(foot)):              # i = nomor baris
+    for j in range(len(foot[i])):       # j = nomor kolom
+        print(i, j, foot[i][j])
+
+print(f"TEST : Cache_note : {cache_note}")
